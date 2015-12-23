@@ -19,16 +19,19 @@ class Provider extends ServiceProvider
 		
 		$this->app->make('Psr\Log\LoggerInterface')->setHandlers(array(new Logger()));
 		
-		$this->app['config']['cache.default'] = 'sae';
-		$this->app['config']['cache.stores.driver'] = 'sae';
-		$this->app->make('cache')->extend('sae', function($app){
-			return $app->make('cache')->repository(new Cache);
+		/** @var \Illuminate\Cache\CacheManager $CacheManager **/
+		$CacheManager = $this->app->make('cache');
+		$CacheManager->extend('sae', function($app){
+			return new Cache;
 		});
+		$CacheManager->setDefaultDriver('sae');
+		$this->app['config']['cache.stores.sae'] = array('driver' => 'sae');
 		
-		$this->app['config']['session.default'] = 'sae';
-		$this->app['config']['session.stores.driver'] = 'sae';
-		$this->app->make('session')->extend('sae', function($app){
+		/** @var \Illuminate\Session\SessionManager $SessionManager **/
+		$SessionManager = $this->app->make('session');
+		$SessionManager->extend('sae', function($app){
 			return new Session;
 		});
+		$SessionManager->setDefaultDriver('sae');
 	}
 }
