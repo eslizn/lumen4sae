@@ -3,7 +3,7 @@
     "description": "The Drive Lumen for Sina App Engine.",
     "keywords": ["drive", "sae", "lumen"],
     "license": "MIT",
-    "homepage": "http://laravel.com",
+    "homepage": "http://github.com/eslizn/lumen4sae",
     "support": {
         "issues": "https://github.com/eslizn/lumen4sae/issues",
         "source": "https://github.com/eslizn/lumen4sae"
