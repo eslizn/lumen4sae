@@ -1,0 +1,33 @@
+{
+    "name": "lumen4sae",
+    "description": "The Drive Lumen for Sina App Engine.",
+    "keywords": ["drive", "sae", "lumen"],
+    "license": "MIT",
+    "homepage": "http://laravel.com",
+    "support": {
+        "issues": "https://github.com/eslizn/lumen4sae/issues",
+        "source": "https://github.com/eslizn/lumen4sae"
+    },
+    "authors": [
+        {
+            "name": "eslizn",
+            "email": "eslizn@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "monolog/monolog": "~1.0",
+        "illuminate/contracts": "5.1.*",
+        "illuminate/cache": "5.1.*",
+        "illuminate/session": "5.1.*",
+        "illuminate/queue": "5.1.*"
+    },
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "SaeService": ""
+        },
+        "classmap": [],
+        "files": []
+    }
+}
