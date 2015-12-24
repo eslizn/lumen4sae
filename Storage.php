@@ -11,8 +11,14 @@ use Illuminate\Contracts\Filesystem\Filesystem;
  * @author eslizn
  *
  */
-class Storage extends \SaeStorage implements Filesystem, Cloud
+class Storage implements Filesystem, Cloud
 {
+	
+	/**
+	 * 
+	 * @var \SaeStorage $storage
+	 */
+	protected $storage;
 	
 	/**
 	 * parse path
@@ -33,7 +39,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 	public function exists($path)
 	{
 		list($domain, $path) = $this->parser($path);
-		return parent::fileExists($domain, $path);
+		return $this->storage->fileExists($domain, $path);
 	}
 	
 	/**
@@ -44,7 +50,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 	public function get($path)
 	{
 		list($domain, $path) = $this->parser($path);
-		return parent::read($domain, $path);
+		return $this->storage->read($domain, $path);
 	}
 	
 	/**
@@ -55,7 +61,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 	public function put($path, $contents, $visibility = null)
 	{
 		list($domain, $path) = $this->parser($path);
-		return parent::write($domain, $path, $contents);
+		return $this->storage->write($domain, $path, $contents);
 	}
 	
 	/**
@@ -109,7 +115,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 	public function delete($paths)
 	{
 		list($domain, $path) = $this->parser($paths);
-		return parent::delete($domain, $path);
+		return $this->storage->delete($domain, $path);
 	}
 	
 	/**
@@ -139,7 +145,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 	public function size($path)
 	{
 		list($domain, $path) = $this->parser($path);
-		$info = parent::getAttr($domain, $path);
+		$info = $this->storage->getAttr($domain, $path);
 		return $info ? $info['length'] : false;
 	}
 	
@@ -166,7 +172,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 		$list = array();
 		$offset = 0;
 		do {
-			$result = $this->getListByPath($domain, $path, 1000, $offset, !$recursive);
+			$result = $this->storage->getListByPath($domain, $path, 1000, $offset, !$recursive);
 			foreach ($result['files'] as $item) {
 				$list[] = $domain . '/' . $item['fullName'];
 			}
@@ -197,7 +203,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 		$list = array();
 		$offset = 0;
 		do {
-			$result = $this->getListByPath($domain, $path, 1000, $offset, !$recursive);
+			$result = $this->storage->getListByPath($domain, $path, 1000, $offset, !$recursive);
 			foreach ($result['dirs'] as $item) {
 				$list[] = $domain . '/' . $item['fullName'];
 			}
@@ -235,7 +241,7 @@ class Storage extends \SaeStorage implements Filesystem, Cloud
 	public function deleteDirectory($directory)
 	{
 		list($domain, $path) = $this->parser($directory);
-		return parent::delete($domain, $path);
+		return $this->storage->delete($domain, $path);
 	}
 	
 }

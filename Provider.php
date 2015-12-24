@@ -47,9 +47,11 @@ class Provider extends ServiceProvider
 		
 		//config storage
 		/** @var \Illuminate\Filesystem\FilesystemManager $FilesystemManager **/
-		$FilesystemManager = $this->app->make('storage');
+		$FilesystemManager = $this->app->make('filesystem');
 		$FilesystemManager->extend('sae', function($app){
 			return new Storage;
 		});
+		$this->app['config']['filesystems.default'] = 'sae';
+		$this->app['config']['filesystems.disks.sae'] = array('driver' => 'sae');
 	}
 }
