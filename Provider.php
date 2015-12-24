@@ -45,6 +45,11 @@ class Provider extends ServiceProvider
 		});
 		$SessionManager->setDefaultDriver('sae');
 		
-		//config queue
+		//config storage
+		/** @var \Illuminate\Filesystem\FilesystemManager $FilesystemManager **/
+		$FilesystemManager = $this->app->make('storage');
+		$FilesystemManager->extend('sae', function($app){
+			return new Storage;
+		});
 	}
 }
