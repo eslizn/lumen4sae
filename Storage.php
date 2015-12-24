@@ -20,6 +20,10 @@ class Storage implements Filesystem, Cloud
 	 */
 	protected $storage;
 	
+	public function __construct() {
+		$this->storage = new \SaeStorage();
+	}
+	
 	/**
 	 * parse path
 	 * 
