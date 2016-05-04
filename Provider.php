@@ -39,16 +39,18 @@ class Provider extends ServiceProvider
 		
 		//config session
 		/** @var \Illuminate\Session\SessionManager $SessionManager **/
+		/*
 		$SessionManager = $this->app->make('session');
 		$SessionManager->extend('sae', function($app){
 			return new Session;
 		});
 		$SessionManager->setDefaultDriver('sae');
+		*/
 		
 		//config storage
 		/** @var \Illuminate\Filesystem\FilesystemManager $FilesystemManager **/
 		$FilesystemManager = $this->app->make('filesystem');
-		$FilesystemManager->extend('sae', function($app){
+		$FilesystemManager->extend('sae', function($app) {
 			return new Storage;
 		});
 		$this->app['config']['filesystems.default'] = 'sae';
